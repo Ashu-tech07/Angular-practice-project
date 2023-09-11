@@ -1,0 +1,134 @@
+  
+  <app-header></app-header>
+  <h1 class="heading">New Angular Project - {{title}}</h1>
+  <div style="border-style: dashed; border-color:rgb(230, 135, 12);"><h1>Sending data from parents to child</h1>
+  <app-login [item]="'skyblue'"></app-login></div>
+<div style="border-style: dashed; border-color:rgb(219, 7, 25);"><h1>Sending data from child to parents :  {{data}}</h1>
+ <app-login (updateDataEvent)="updateData($event)"></app-login>
+</div>
+ <br>
+ <div style="border-style: dashed; border-color:rgb(27, 187, 13);">
+  <input type="text" #box22 placeholder="Enter Name" />
+  <button (click)="getName(box22.value)">Click </button>
+  <p class="p1">{{displayValue}}</p>
+  <br/>
+  <input type="text" #box (blur)="getData(box.value)" placeholder="blur" />
+  <br/> <br/>
+  <input type="text" #box1 (input)="getData(box1.value)" placeholder="input" />
+  <p class="p2">{{displayValue1}}</p> </div>
+  <style>
+    .p1{
+      color:aqua;
+      padding-left: 2%;
+    }
+    .p2{
+      color:blueviolet;
+      padding-left: 2%;
+    }
+  </style>
+<div style="border-style: dashed; border-color:aqua;">
+<h1>If-Else Condition:</h1>
+<h3 *ngIf="show; then ifBlock else elseBlock"></h3>
+<ng-template #ifBlock >
+  <h3>If block is running</h3>
+</ng-template>
+<ng-template #elseBlock>
+  <h3>Else Block is running</h3>
+</ng-template>
+
+<h1>Multiple If Else Condition:</h1>
+<ng-template [ngIf]="color==='red'">
+  <h3 style="color: red;">Red Color</h3>
+</ng-template>
+<ng-template [ngIf]="color==='green'">
+  <h3 style="color: green;">Green Color</h3>
+</ng-template>
+<ng-template [ngIf]="color==='blue'">
+  <h3 style="color: blue;">Blue Color</h3>
+</ng-template>
+</div>
+<div style="border-color: brown; border-style: dashed;">
+<h1>Switch Case</h1>
+<div [ngSwitch]="color">
+  <h3 *ngSwitchCase="'red'" style="color: red;"> Red Color</h3>
+  <h3 *ngSwitchCase="'green'" style="color: green;"> Green Color</h3>
+  <h3 *ngSwitchCase="'blue'" style="color: blue;"> Blue Color</h3>
+  <h3 *ngSwitchCase="'orange'" style="color: orange"> Orange Color</h3>
+  <h3 *ngSwitchCase="'olive'" style="color: olive;"> Olive Color</h3>
+  <h3 *ngSwitchDefault > Unknown Color</h3>
+</div>
+</div>
+<div style="border-style: dashed; border-color: chocolate;">
+<h1>For Loop</h1>
+<button (click)="hideData()">Hide/Show</button>
+<div *ngIf="display">
+<p *ngFor="let i of users">Name is : {{i}}</p>
+<p *ngFor="let i of usersDetails"> {{i.name}} -- {{i.email}} -- {{i.mob}}</p>
+</div>
+</div>
+<div style="border-style: dashed; border-color: aquamarine;">
+<h1>Nested For Loop </h1>
+<button (click)="hideData1()">Hide/Show</button>
+<div *ngIf="display1">
+<ul *ngFor="let i of usersDetails">
+  <li>Name : {{i.name}}</li>
+  <li>Address : {{i.address}}</li>
+  <li>Social Accounts :</li>
+  <ul *ngFor="let j of i.socialAccounts">
+    <li>{{j}}</li>
+  </ul>
+</ul>
+</div>
+</div>
+
+<div style="border-color: black; border-style: dashed;">
+  <h1 [style.color]="color" [style.backgroundColor]="bgColor">Style Binding</h1>
+  <button (click)="updateColor()">Update Color</button>
+  <button (click)="originalColor()">Original Color</button>
+</div>
+
+<div style="border-style: dashed;border-color: rgb(110, 18, 6);">
+  <h1> Registration Form : </h1>
+  <form #basicForm="ngForm" (ngSubmit)="getFormData(basicForm.value)">
+    <input type="'text" required #username="ngModel" name="user" placeholder="Enter User Name"  ngModel > 
+    <span *ngIf="username.invalid && username.touched" style="color: red;"> Enter valid name</span><br><br>
+    <input type="'email" required email #email="ngModel"  name="email" placeholder="Enter User Email" ngModel />
+    <span *ngIf="email.invalid && email.touched" style="color: red;"> Enter valid email</span><br><br>
+    <input type="'text" required  #pass="ngModel" minlength="4" name="password" placeholder="Enter User Password" ngModel />
+    <span *ngIf="pass.invalid && pass.touched" style="color: red;"> Enter valid password(minimun 4 characters)</span><br><br>
+    <button [disabled]="basicForm.invalid">Register</button>
+  </form>
+  <ul>
+    <li>{{ngformdata.user}}</li>
+    <li>{{ngformdata.email}}</li>
+    <li>{{ngformdata.password}}</li>
+  </ul>
+</div>
+
+<div style="border-style: solid; border-radius: 15px; border-color: chartreuse;">
+  <h1> Todo List</h1>
+  <input type="text" placeholder="Enter new task " #task>
+  <br><br>
+  <button (click)="addTask(task.value)">Add task</button>
+  <br><br>
+  <ul *ngFor="let i of tasklist" >
+    <li><td>{{i.name}}</td> <td><button (click)="removeTask(i.id)">RemoveTask</button></td></li>
+  </ul>
+
+</div>
+
+<div style="border-style: dashed; border-color: coral;">
+  <h1>Two way binding</h1>
+  <input type="text" [(ngModel)]="show1">
+  <h3>{{show1}}</h3>
+</div>
+
+<div style="border-style: dashed; border-color: blueviolet;">
+  <h1>Pipes</h1>
+  <h3>{{title | uppercase}}</h3>
+  <h3>{{title | lowercase}}</h3>
+  <h3>{{'Ashish Yadav Developer'| slice : 3 : 9 |uppercase}}</h3>
+  <h3>{{ today | date : 'fullDate'}}</h3>
+  <h3>{{200| currency: 'INR'}}</h3>
+  <h4>Convert 200 dollors to INR : {{200 | usdToInr: 80}}</h4>
+</div>
